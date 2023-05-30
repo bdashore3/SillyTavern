@@ -81,6 +81,8 @@ async function moduleWorker() {
         lastCharacter = context.groupId || context.characterId;
     }
 
+    // Character file name
+    const avatarFileName = context.characters[context.characterId].avatar.split(".")[0];
     const offlineMode = $('.expression_settings .offline_mode');
     if (!modules.includes('classify')) {
         $('.expression_settings').show();
@@ -88,7 +90,7 @@ async function moduleWorker() {
         lastCharacter = context.groupId || context.characterId;
 
         if (context.groupId) {
-            await validateImages(currentLastMessage.name, true);
+            await validateImages(avatarFileName === undefined ? currentLastMessage.name : avatarFileName, true);
         }
 
         return;
@@ -99,7 +101,7 @@ async function moduleWorker() {
             expressionsList = null;
             spriteCache = {};
             expressionsList = await getExpressionsList();
-            await validateImages(currentLastMessage.name, true);
+            await validateImages(avatarFileName === undefined ? currentLastMessage.name : avatarFileName, true);
         }
 
         offlineMode.css('display', 'none');
@@ -142,7 +144,7 @@ async function moduleWorker() {
                 expression = 'joy';
             }
 
-            setExpression(name, expression, force);
+            setExpression(avatarFileName === undefined ? name : avatarFileName, expression, force);
         }
 
     }
