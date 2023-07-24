@@ -236,6 +236,7 @@ jQuery(async () => {
         onRegexEditorOpenClick(false);
     });
 
+    /*
     $('#saved_regex_scripts').sortable({
         stop: function () {
             let newScripts = [];
@@ -254,7 +255,8 @@ jQuery(async () => {
             // TODO: Maybe reload regex scripts after move
         },
     });
+    */
 
     await loadRegexScripts();
-    $("#saved_regex_scripts").sortable("enable");
+    //$("#saved_regex_scripts").sortable("enable");
 });
